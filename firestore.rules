@@ -1,0 +1,69 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function validProfile(userId) {
+      return request.resource.data.keys().hasOnly([
+          'uid', 'displayName', 'avatarUrl', 'gender', 'favoriteMediaIds', 'updatedAtEpochMillis'
+        ])
+        && request.resource.data.uid == userId
+        && request.resource.data.displayName is string
+        && request.resource.data.displayName.size() > 0
+        && request.resource.data.displayName.size() <= 40
+        && (request.resource.data.avatarUrl == null || request.resource.data.avatarUrl is string)
+        && request.resource.data.gender is string
+        && request.resource.data.gender in ['Sin especificar', 'Mujer', 'Hombre', 'No binario', 'Otro']
+        && request.resource.data.favoriteMediaIds is list
+        && request.resource.data.favoriteMediaIds.size() <= 5
+        && request.resource.data.updatedAtEpochMillis is int;
+    }
+
+    function validReview() {
+      return request.resource.data.keys().hasOnly([
+          'id', 'userId', 'userDisplayName', 'userAvatarUrl', 'mediaId', 'mediaTitle',
+          'rating', 'comment', 'createdAtEpochMillis', 'updatedAtEpochMillis'
+        ])
+        && request.resource.data.userId == request.auth.uid
+        && request.resource.data.id is string
+        && request.resource.data.id.size() > 0
+        && request.resource.data.userDisplayName is string
+        && request.resource.data.userDisplayName.size() <= 40
+        && (request.resource.data.userAvatarUrl == null || request.resource.data.userAvatarUrl is string)
+        && request.resource.data.mediaId is string
+        && request.resource.data.mediaId.size() > 0
+        && request.resource.data.mediaTitle is string
+        && request.resource.data.mediaTitle.size() <= 150
+        && (request.resource.data.rating == null ||
+            (request.resource.data.rating is int && request.resource.data.rating >= 1 && request.resource.data.rating <= 5))
+        && request.resource.data.comment is string
+        && request.resource.data.comment.size() <= 500
+        && request.resource.data.createdAtEpochMillis is int
+        && request.resource.data.updatedAtEpochMillis is int;
+    }
+
+    match /profiles/{userId} {
+      allow read: if true;
+      allow create, update: if signedIn()
+        && request.auth.uid == userId
+        && validProfile(userId);
+      allow delete: if signedIn() && request.auth.uid == userId;
+    }
+
+    match /reviews/{reviewId} {
+      allow read: if true;
+      allow create: if signedIn()
+        && validReview()
+        && request.resource.data.id == reviewId;
+      allow update: if signedIn()
+        && resource.data.userId == request.auth.uid
+        && validReview()
+        && request.resource.data.id == reviewId;
+      allow delete: if signedIn()
+        && resource.data.userId == request.auth.uid;
+    }
+  }
+}
