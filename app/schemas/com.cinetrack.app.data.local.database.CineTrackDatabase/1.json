@@ -1,0 +1,175 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "18a996c3b17f71be3d27cea49f64d824",
+    "entities": [
+      {
+        "tableName": "user_media",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `userId` TEXT NOT NULL, `mediaId` TEXT NOT NULL, `status` TEXT NOT NULL, `personalRating` INTEGER, `comment` TEXT NOT NULL, `favorite` INTEGER NOT NULL, `createdAt` INTEGER NOT NULL, `updatedAt` INTEGER NOT NULL, `mediaTitle` TEXT, `mediaType` TEXT, `mediaYear` INTEGER, `mediaGenres` TEXT, `mediaDurationMinutes` INTEGER, `mediaSynopsis` TEXT, `mediaGeneralRating` REAL, `mediaRatingCount` INTEGER, `mediaAgeRating` TEXT, `mediaDirector` TEXT, `mediaPosterUrl` TEXT, `mediaBackdropUrl` TEXT, `mediaTmdbId` INTEGER, PRIMARY KEY(`userId`, `mediaId`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "userId",
+            "columnName": "userId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "mediaId",
+            "columnName": "mediaId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "status",
+            "columnName": "status",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "personalRating",
+            "columnName": "personalRating",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "comment",
+            "columnName": "comment",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "favorite",
+            "columnName": "favorite",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "createdAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updatedAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "mediaTitle",
+            "columnName": "mediaTitle",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "mediaType",
+            "columnName": "mediaType",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "mediaYear",
+            "columnName": "mediaYear",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "mediaGenres",
+            "columnName": "mediaGenres",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "mediaDurationMinutes",
+            "columnName": "mediaDurationMinutes",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "mediaSynopsis",
+            "columnName": "mediaSynopsis",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "mediaGeneralRating",
+            "columnName": "mediaGeneralRating",
+            "affinity": "REAL"
+          },
+          {
+            "fieldPath": "mediaRatingCount",
+            "columnName": "mediaRatingCount",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "mediaAgeRating",
+            "columnName": "mediaAgeRating",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "mediaDirector",
+            "columnName": "mediaDirector",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "mediaPosterUrl",
+            "columnName": "mediaPosterUrl",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "mediaBackdropUrl",
+            "columnName": "mediaBackdropUrl",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "mediaTmdbId",
+            "columnName": "mediaTmdbId",
+            "affinity": "INTEGER"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "userId",
+            "mediaId"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_user_media_userId",
+            "unique": false,
+            "columnNames": [
+              "userId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_user_media_userId` ON `${TABLE_NAME}` (`userId`)"
+          },
+          {
+            "name": "index_user_media_userId_favorite",
+            "unique": false,
+            "columnNames": [
+              "userId",
+              "favorite"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_user_media_userId_favorite` ON `${TABLE_NAME}` (`userId`, `favorite`)"
+          },
+          {
+            "name": "index_user_media_userId_status",
+            "unique": false,
+            "columnNames": [
+              "userId",
+              "status"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_user_media_userId_status` ON `${TABLE_NAME}` (`userId`, `status`)"
+          }
+        ]
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '18a996c3b17f71be3d27cea49f64d824')"
+    ]
+  }
+}
