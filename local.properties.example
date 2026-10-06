@@ -1,0 +1,9 @@
+# Copy these keys into your real local.properties. Never commit local.properties.
+# Android Studio also keeps sdk.dir in that same file.
+
+# TMDB API Read Access Token (Bearer token, not the v3 query-string api_key).
+TMDB_READ_TOKEN=PASTE_YOUR_TMDB_READ_ACCESS_TOKEN_HERE
+
+# Firebase Hosting/App Links base URL. Change this if the Firebase project ID differs.
+CINETRACK_WEB_BASE_URL=https://cinetrack-9df50.web.app
+FIREBASE_STORAGE_ENABLED=false
