@@ -1,0 +1,71 @@
+digraph CineTrack {
+  graph [bgcolor="#0F0F16", rankdir=TB, pad=0.45, nodesep=0.44, ranksep=0.60, fontname="Arial", label="CineTrack — Flujo de usuario 0.8", labelloc=t, fontsize=25, fontcolor="#F7F5FF", splines=ortho];
+  node [shape=box, style="rounded,filled", fontname="Arial", fontsize=11, margin="0.18,0.12", color="#2A2938", penwidth=1.3, fillcolor="#15151F", fontcolor="#F7F5FF"];
+  edge [fontname="Arial", fontsize=9, color="#9996A8", fontcolor="#9996A8", arrowsize=0.70, penwidth=1.1];
+
+  Start [shape=circle, label="INICIO", fillcolor="#8B6CFF", fontcolor="#FFFFFF", color="#8B6CFF"];
+  Splash [label="Splash\nVerifica sesión"];
+  Session [shape=diamond, label="¿Sesión activa?", fillcolor="#1C1C28"];
+  Login [label="Login\nCorreo + contraseña"];
+  Register [label="Registro\nNombre + correo + contraseña"];
+  Forgot [label="Recuperar contraseña\nEnviar instrucciones"];
+  Main [shape=oval, label="NAVEGACIÓN PRINCIPAL\nInicio · Buscar · Mi lista · Perfil", fillcolor="#1C1C28", color="#8B6CFF", penwidth=1.8];
+
+  Home [label="Inicio\nTendencias · filtros · catálogo"];
+  Search [label="Buscar\nTipo · género · texto"];
+  MyList [label="Mi lista\nPendiente · Viendo · Vista"];
+  Profile [label="Perfil\nActividad · cuenta · compartir"];
+  Detail [label="Detalle\nSinopsis · reparto · seguimiento\nreseña + recomendados"];
+  Review [label="Mi registro\nEstado · estrellas · comentario"];
+  Related [label="Relacionadas\nGénero · director · actor · afinidad"];
+  EditProfile [label="Editar perfil\nNombre · avatar · género · favoritas"];
+  Settings [label="Configuración\nCuenta · tema · privacidad"];
+  Credits [label="Créditos\nEquipo · versión · TMDB"];
+  DeleteAccount [label="Eliminar cuenta\nPerfil · reviews · Auth · Room", fillcolor="#28151B", color="#FF536A"];
+  PublicProfile [label="Perfil público", color="#8B6CFF"];
+  PublicReview [label="Reseña pública", color="#8B6CFF"];
+  Link [shape=oval, label="ENLACE COMPARTIDO", fillcolor="#1C1C28", color="#8B6CFF"];
+  Logout [shape=diamond, label="Cerrar sesión", fillcolor="#28151B", color="#FF536A"];
+
+  Start -> Splash -> Session;
+  Session -> Main [label="Sí"];
+  Session -> Login [label="No"];
+  Login -> Main [label="Acceso correcto"];
+  Login -> Register [label="Crear cuenta"];
+  Login -> Forgot [label="Olvidé contraseña"];
+  Register -> Main [label="Registro correcto"];
+  Register -> Login [label="Ya tengo cuenta"];
+  Forgot -> Login [label="Volver"];
+
+  Main -> Home;
+  Main -> Search;
+  Main -> MyList;
+  Main -> Profile;
+  {rank=same; Home; Search; MyList; Profile;}
+
+  Home -> Detail [label="Abrir título"];
+  Search -> Detail [label="Abrir resultado"];
+  MyList -> Detail [label="Abrir guardado"];
+  Detail -> MyList [label="Guardar / estado"];
+  Detail -> Related [label="Relacionados"];
+  Related -> Detail [label="Abrir"];
+  Detail -> Review [label="Tu valoración"];
+  Review -> Detail [label="Guardar / volver"];
+  Review -> PublicReview [label="Publicar"];
+  Detail -> Link [label="Compartir título"];
+  PublicReview -> Link [label="Compartir"];
+
+  Profile -> EditProfile;
+  Profile -> Settings;
+  Profile -> Credits;
+  Profile -> PublicProfile [label="Compartir perfil"];
+  PublicProfile -> Link;
+  Profile -> Logout;
+  Settings -> Forgot [label="Cambiar contraseña"];
+  Settings -> DeleteAccount [label="Eliminar cuenta"];
+  DeleteAccount -> Login [label="Eliminación completada"];
+  EditProfile -> Profile [label="Guardar"];
+  Settings -> Profile [label="Atrás"];
+  Credits -> Profile [label="Atrás"];
+  Logout -> Login;
+}
