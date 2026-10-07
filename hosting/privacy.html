@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="es">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0F0F16"><title>Privacidad · CineTrack</title>
+<style>:root{color-scheme:dark;--bg:#0f0f16;--card:#171720;--text:#f7f5ff;--muted:#b0adba;--accent:#8b6cff;--border:#2a2938}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,sans-serif;line-height:1.65;padding:24px}main{max-width:760px;margin:auto}.card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:24px;margin:16px 0}h1,h2{line-height:1.2}h1{font-size:38px}h2{margin-top:0}a{color:#ac98ff}.muted{color:var(--muted)}code{color:#d4caff}</style></head>
+<body><main>
+<h1>Política de privacidad de <span style="color:#8b6cff">CineTrack</span></h1>
+<p class="muted">Versión de trabajo para la aplicación académica CineTrack. Debe revisarse nuevamente antes de la publicación definitiva.</p>
+<div class="card"><h2>Datos locales</h2><p>La lista personal, estados de visualización, favoritos, puntuaciones y comentarios privados se almacenan localmente en el dispositivo mediante Room. Las preferencias de apariencia se almacenan mediante DataStore.</p></div>
+<div class="card"><h2>Cuenta y datos en Firebase</h2><p>Firebase Authentication procesa el correo y la identidad necesaria para iniciar sesión. Si el usuario decide crear un perfil público o publicar una reseña, esos datos pueden almacenarse en Cloud Firestore. Una foto de perfil puede almacenarse en Firebase Storage si esa función está habilitada.</p></div>
+<div class="card"><h2>Catálogo audiovisual</h2><p>CineTrack utiliza la API de The Movie Database (TMDB) para consultar películas, series, imágenes, créditos y recomendaciones. CineTrack no envía a TMDB la lista privada del usuario, sus comentarios privados ni sus credenciales de Firebase.</p></div>
+<div class="card"><h2>Contenido público</h2><p>Las reseñas son privadas por defecto. Solo se publican cuando el usuario activa explícitamente la opción correspondiente. Los perfiles públicos pueden mostrar nombre, avatar, género, películas favoritas y reseñas que el usuario haya decidido publicar.</p></div>
+<div class="card"><h2>Eliminación</h2><p>El usuario puede iniciar la eliminación desde <strong>Configuración → Eliminar cuenta</strong>. También existe un recurso externo en <a href="/delete-account">/delete-account</a>. La eliminación intenta borrar el perfil público, reseñas públicas, datos privados locales y la cuenta de autenticación asociada.</p></div>
+<div class="card"><h2>Seguridad y terceros</h2><p>La app usa conexiones HTTPS para TMDB y los servicios de Firebase. CineTrack no incorpora actualmente publicidad ni un SDK de analítica. Esta política debe actualizarse si se incorporan nuevos servicios.</p></div>
+<p><a href="/">Volver a CineTrack</a></p>
+</main></body></html>
